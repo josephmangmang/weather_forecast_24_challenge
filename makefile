@@ -1,4 +1,5 @@
-
+run:
+	flutter run
 pub_get:
 	flutter pub get
 clean:
