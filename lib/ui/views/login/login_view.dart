@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:weather_forecast_24_challenge/ui/common/ui_helpers.dart';
 
+import '../../../resources/resources.dart';
+import '../../widgets/widgets.dart';
 import 'login_viewmodel.dart';
 
 class LoginView extends StackedView<LoginViewModel> {
@@ -13,9 +16,28 @@ class LoginView extends StackedView<LoginViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
       body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+        padding: const EdgeInsets.symmetric(horizontal: 25.0),
+        child: Column(
+          children: [
+            AppToolbar(
+              title: S.current.appName,
+            ),
+            verticalSpace(100),
+            Text(
+              S.current.welcomeMessage,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(fontWeight: FontWeight.bold, height: 1.5),
+            ),
+            verticalSpace(50),
+            AppButton(
+              label: S.current.login,
+              onPressed: viewModel.loginPressed,
+            )
+          ],
+        ),
       ),
     );
   }
