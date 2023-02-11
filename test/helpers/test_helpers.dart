@@ -3,6 +3,7 @@ import 'package:mockito/mockito.dart';
 import 'package:weather_forecast_24_challenge/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:weather_forecast_24_challenge/services/repository/repository.dart';
+import 'package:weather_forecast_24_challenge/services/api/api_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -12,6 +13,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<BottomSheetService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<Repository>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<ApiService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {

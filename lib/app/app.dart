@@ -1,3 +1,4 @@
+import 'package:weather_forecast_24_challenge/services/api/api_service_impl.dart';
 import 'package:weather_forecast_24_challenge/services/repository/repository.dart';
 import 'package:weather_forecast_24_challenge/services/repository/repository_impl.dart';
 import 'package:weather_forecast_24_challenge/ui/bottom_sheets/notice/notice_sheet.dart';
@@ -9,6 +10,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:weather_forecast_24_challenge/ui/views/login/login_view.dart';
 
 import 'package:weather_forecast_24_challenge/ui/views/weather_detail/weather_detail_view.dart';
+import 'package:weather_forecast_24_challenge/services/api/api_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -24,7 +26,8 @@ import 'package:weather_forecast_24_challenge/ui/views/weather_detail/weather_de
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: SnackbarService),
-    LazySingleton(classType: RepositoryImpl, asType: Repository)
+    LazySingleton(classType: RepositoryImpl, asType: Repository),
+    LazySingleton(classType: ApiServiceImpl, asType: ApiService),
 // @stacked-service
   ],
   bottomsheets: [

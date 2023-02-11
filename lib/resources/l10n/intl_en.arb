@@ -5,5 +5,10 @@
   "welcomeMessage": "Welcome to the weather forecast web application. Please login with your Github user to use the application and view the weather in your city",
   "logout": "Logout",
   "hintCity": "City",
-  "displayWeather": "Display Weather"
+  "displayWeather": "Display Weather",
+  "cityIsEmpty": "City is empty",
+  "back": "Back",
+  "headerDate": "Date (mm/dd/yyyy)",
+  "headerTemperature": "Temperature",
+  "githubPageUrlNotAvailable": "Github page URL not available"
 }

@@ -12,6 +12,8 @@ import 'package:stacked_services/src/dialog/dialog_service.dart';
 import 'package:stacked_services/src/navigation/navigation_service.dart';
 import 'package:stacked_services/src/snackbar/snackbar_service.dart';
 
+import '../services/api/api_service.dart';
+import '../services/api/api_service_impl.dart';
 import '../services/repository/repository.dart';
 import '../services/repository/repository_impl.dart';
 
@@ -29,4 +31,5 @@ Future<void> setupLocator(
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => SnackbarService());
   locator.registerLazySingleton<Repository>(() => RepositoryImpl());
+  locator.registerLazySingleton<ApiService>(() => ApiServiceImpl());
 }

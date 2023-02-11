@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:weather_forecast_24_challenge/ui/common/app_colors.dart';
-import 'package:weather_forecast_24_challenge/ui/common/ui_helpers.dart';
 
+import '../../../models/user.dart';
+import '../../../resources/resources.dart';
+import '../../common/ui_helpers.dart';
+import '../../widgets/widgets.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StackedView<HomeViewModel> {
@@ -15,67 +17,49 @@ class HomeView extends StackedView<HomeViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                verticalSpaceLarge,
-                Column(
-                  children: [
-                    const Text(
-                      'Hello, STACKED!',
-                      style: TextStyle(
-                        fontSize: 35,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                    verticalSpaceMedium,
-                    MaterialButton(
-                      color: Colors.black,
-                      onPressed: viewModel.incrementCounter,
-                      child: Text(
-                        viewModel.counterLabel,
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    MaterialButton(
-                      color: kcDarkGreyColor,
-                      child: const Text(
-                        'Show Dialog',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      onPressed: viewModel.showDialog,
-                    ),
-                    MaterialButton(
-                      color: kcDarkGreyColor,
-                      child: const Text(
-                        'Show Bottom Sheet',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      onPressed: viewModel.showBottomSheet,
-                    ),
-                  ],
-                )
-              ],
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 25.0),
+        child: Column(
+          children: [
+            AppToolbar(
+              trailing: AppButton(
+                label: S.current.logout,
+                onPressed: viewModel.logoutPressed,
+              ),
             ),
-          ),
+            verticalSpace(100),
+            OptionalView<User>(
+                value: viewModel.user,
+                builder: (context, value) => UserProfileView(user: value)),
+            TextField(
+              decoration: InputDecoration(
+                hintText: S.current.hintCity,
+                filled: false,
+                isDense: true,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(color: Theme.of(context).focusColor),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(color: Colors.black),
+                ),
+              ),
+              onChanged: viewModel.onSearchTextChanged,
+            ),
+            verticalSpace(16),
+            AppButton(
+              label: S.current.displayWeather,
+              onPressed: viewModel.displayWeatherPressed,
+            )
+          ],
         ),
       ),
     );
   }
+
+  @override
+  void onViewModelReady(HomeViewModel viewModel) => viewModel.init();
 
   @override
   HomeViewModel viewModelBuilder(

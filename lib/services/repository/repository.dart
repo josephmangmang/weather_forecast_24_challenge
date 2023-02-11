@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
+import 'package:geocoding/geocoding.dart';
 
 import '../../models/user.dart';
+import '../../models/weather_data.dart';
 import 'exceptions/api_exception.dart';
 
 abstract class Repository {
@@ -13,4 +15,9 @@ abstract class Repository {
   Future<void> logout();
 
   Future<User?> getUser();
+
+  Future<Either<ApiRequestException, WeatherData>> getWeatherData(
+      String address);
+
+  Future<Location?> getAddressLocation(String address);
 }

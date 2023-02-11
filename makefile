@@ -4,7 +4,7 @@ pub_get:
 clean:
 	flutter clean && flutter pub get
 build:
-	flutter pub run build_runner build
+	flutter pub get && flutter pub run build_runner build
 watch:
 	flutter packages pub run build_runner watch
 force_build:

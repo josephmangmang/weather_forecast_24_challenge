@@ -10,6 +10,7 @@ class ServerUserDataMapper extends BaseDataMapper<UserProfile, User> {
       nickname: data?.nickname ?? '',
       name: data?.name ?? '',
       picture: data?.pictureUrl,
+      profileUrl: data?.profileUrl,
     );
   }
 }
