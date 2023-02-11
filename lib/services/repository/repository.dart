@@ -6,7 +6,7 @@ import '../../models/weather_data.dart';
 import 'exceptions/api_exception.dart';
 
 abstract class Repository {
-  bool get isLoggedIn;
+  Future<bool> get isLoggedIn;
 
   bool get isDarkMode;
 

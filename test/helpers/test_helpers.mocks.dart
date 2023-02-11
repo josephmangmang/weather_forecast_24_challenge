@@ -663,11 +663,11 @@ class MockDialogService extends _i1.Mock implements _i4.DialogService {
 /// See the documentation for Mockito's code generation for more information.
 class MockRepository extends _i1.Mock implements _i8.Repository {
   @override
-  bool get isLoggedIn => (super.noSuchMethod(
+  _i6.Future<bool> get isLoggedIn => (super.noSuchMethod(
         Invocation.getter(#isLoggedIn),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+        returnValue: _i6.Future<bool>.value(false),
+        returnValueForMissingStub: _i6.Future<bool>.value(false),
+      ) as _i6.Future<bool>);
   @override
   bool get isDarkMode => (super.noSuchMethod(
         Invocation.getter(#isDarkMode),

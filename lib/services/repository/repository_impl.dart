@@ -7,6 +7,7 @@ import 'package:weather_forecast_24_challenge/models/weather_data.dart';
 import 'package:weather_forecast_24_challenge/services/api/api_service.dart';
 
 import '../../app/app.locator.dart';
+import '../../app/common/session_manager.dart';
 import 'exceptions/api_exception.dart';
 import 'mapper/mapper.dart';
 import 'repository.dart';
@@ -16,33 +17,34 @@ class RepositoryImpl extends Repository {
   final Auth0 auth0 = Auth0(EnvConstants.oauthDomain, EnvConstants.oauthClientId);
   final serverUserDataMapper = ServerUserDataMapper();
   final serverWeatherDataMapper = ServerWeatherDataMapper();
-  Credentials? _credentials;
 
   @override
   bool get isDarkMode => false;
 
   @override
-  bool get isLoggedIn => _credentials != null;
+  Future<bool> get isLoggedIn => SessionManager.isLogin();
 
   @override
   Future<Either<ApiRequestException, User>> login() async {
     try {
-      _credentials = await auth0.webAuthentication(scheme: EnvConstants.oauthScheme).login();
-      return Right(serverUserDataMapper.mapToEntity(_credentials?.user));
+     final _credentials = await auth0.webAuthentication(scheme: EnvConstants.oauthScheme).login();
+      final user = serverUserDataMapper.mapToEntity(_credentials.user);
+      SessionManager.login(user);
+      return Right(user);
     } catch (e) {
       return Left(ApiRequestException('unexpected error'));
     }
   }
 
   @override
-  Future<void> logout() {
-    _credentials = null;
+  Future<void> logout() async {
+    await SessionManager.logout();
     return auth0.webAuthentication().logout();
   }
 
   @override
   Future<User?> getUser() async {
-    return serverUserDataMapper.mapToEntity(_credentials?.user);
+    return SessionManager.getUser();
   }
 
   @override
