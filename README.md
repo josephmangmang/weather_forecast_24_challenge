@@ -1,5 +1,6 @@
 
 # Weather forecast 24h challenge
+Minimal architecture for small-mid scale applications.
 
 #### 🏛️ Architecture
 MVVM architecture
@@ -12,7 +13,7 @@ This means that the User interface can only communicate to the ViewModel and doe
 
 #### Setup
 1. Clone repository
-2. run `make pub_get`
+2. run `make pub_get` or you can run manually the script in `makefile`
 3. run `make force_build`
 4. start the app by running `make run`
 
